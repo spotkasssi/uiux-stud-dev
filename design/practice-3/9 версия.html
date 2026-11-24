@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сверка — проверка резюме под вакансию</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Нейтральные серые и белые поверхности */
+      --dark-bg: #121316;
+      --dark-surface: #1A1C20;
+      --dark-elevated: #23262C;
+      --dark-border: #2E323A;
+
+      --light-bg: #FFFFFF;
+      --light-subtle: #F4F5F7;
+      --light-border: #E5E7EB;
+      --line-strong: #D1D5DB;
+
+      /* Контрастный текст (>= 4.5:1) */
+      --ink-white: #FFFFFF;
+      --ink-light-muted: #D1D5DB;
+      --ink-dark: #111827;
+      --ink-dark-muted: #374151;
+      --ink-dark-soft: #4B5563;
+
+      /* Один акцент — ядерный зелёный (только главное действие и фокус) */
+      --accent: #39FF14;
+      --accent-hover: #2EE00E;
+      --accent-ink: #0B110B;
+      --accent-soft: #ECFDF5;
+
+      /* Шкала отступов: кратна 4 или 8 px */
+      --s-4: 4px;
+      --s-8: 8px;
+      --s-12: 12px;
+      --s-16: 16px;
+      --s-24: 24px;
+      --s-32: 32px;
+      --s-48: 48px;
+      --s-64: 64px;
+
+      /* 5 текстовых стилей */
+      --fs-h1: 64px;
+      --lh-h1: 1.06;
+      --fs-h2: 28px;
+      --lh-h2: 1.2;
+      --fs-lead: 18px;
+      --lh-lead: 1.55;
+      --fs-body: 15px;
+      --lh-body: 1.55;
+      --fs-meta: 13px;
+      --lh-meta: 1.45;
+
+      --r-sm: 4px;
+      --r-md: 8px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      color: var(--ink-dark);
+      background-color: var(--light-bg);
+      width: 100%;
+      min-width: 1280px;
+    }
+
+    /* Шапка */
+    .topbar {
+      width: 100%;
+      height: 64px;
+      background-color: var(--dark-surface);
+      border-bottom: 1px solid var(--dark-border);
+      color: var(--ink-white);
+    }
+
+    .topbar-inner {
+      width: 100%;
+      height: 100%;
+      padding: 0 var(--s-48);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-12);
+      color: var(--ink-white);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-svg {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .topbar-meta {
+      font-size: var(--fs-meta);
+      color: var(--ink-light-muted);
+    }
+
+    /* Экраны */
+    .page {
+      display: none;
+      width: 100%;
+    }
+
+    .page.is-active {
+      display: block;
+    }
+
+    /* Первый тёмный блок — растянут до низа исходного экрана */
+    .hero-full {
+      width: 100%;
+      min-height: calc(100vh - 64px);
+      background-color: var(--dark-bg);
+      color: var(--ink-white);
+      padding: var(--s-64) var(--s-48);
+      border-bottom: 1px solid var(--dark-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .intro-head {
+      margin-bottom: var(--s-48);
+    }
+
+    .intro-head h1 {
+      font-size: var(--fs-h1);
+      line-height: var(--lh-h1);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--ink-white);
+      max-width: 22ch;
+      margin-bottom: var(--s-24);
+    }
+
+    .intro-head p {
+      font-size: var(--fs-lead);
+      line-height: var(--lh-lead);
+      color: var(--ink-light-muted);
+      max-width: 60ch;
+    }
+
+    .dark-h2 {
+      font-size: var(--fs-h2);
+      line-height: var(--lh-h2);
+      font-weight: 700;
+      color: var(--ink-white);
+      margin-bottom: var(--s-24);
+    }
+
+    /* Горизонтальный список на всю ширину: в покое видны крупные цифры, при наведении расширяется одна и сужаются остальные */
+    .stack-strip {
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      min-height: 264px;
+      border: 1px solid var(--dark-border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background-color: var(--dark-surface);
+    }
+
+    .stack-card {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: var(--s-32);
+      background-color: var(--dark-surface);
+      border-right: 1px solid var(--dark-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      overflow: hidden;
+      transition: flex 0.36s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+    }
+
+    .stack-card:last-child {
+      border-right: none;
+    }
+
+    .stack-strip:hover .stack-card {
+      flex: 0.65 1 0;
+    }
+
+    .stack-strip .stack-card:hover {
+      flex: 3.4 1 0;
+      background-color: var(--dark-elevated);
+    }
+
+    .stack-num {
+      font-size: 72px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      white-space: nowrap;
+      transition: color 0.25s ease;
+    }
+
+    .stack-card:hover .stack-num {
+      color: var(--accent);
+    }
+
+    .stack-hidden {
+      max-width: 0;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: max-width 0.36s ease, max-height 0.36s ease, opacity 0.25s ease, margin-top 0.25s ease;
+      margin-top: 0;
+    }
+
+    .stack-card:hover .stack-hidden {
+      max-width: 680px;
+      max-height: 180px;
+      opacity: 1;
+      margin-top: var(--s-16);
+      white-space: normal;
+    }
+
+    .stack-hidden h3 {
+      font-size: 22px;
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--ink-white);
+      margin-bottom: var(--s-8);
+    }
+
+    .stack-hidden p {
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+      color: var(--ink-light-muted);
+      max-width: 54ch;
+    }
+
+    /* Белый блок загрузки / результатов на всю ширину */
+    .band-white {
+      width: 100%;
+      min-height: calc(100vh - 64px);
+      background-color: var(--light-bg);
+      color: var(--ink-dark);
+      padding: var(--s-64) var(--s-48);
+    }
+
+    .light-h2 {
+      font-size: var(--fs-h2);
+      line-height: var(--lh-h2);
+      font-weight: 700;
+      color: var(--ink-dark);
+      margin-bottom: var(--s-8);
+    }
+
+    .light-lead {
+      color: var(--ink-dark-muted);
+      margin-bottom: var(--s-32);
+      max-width: 64ch;
+    }
+
+    .form-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-48);
+      padding-bottom: var(--s-32);
+      border-bottom: 1px solid var(--light-border);
+      margin-bottom: var(--s-24);
+    }
+
+    .col-block h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink-dark);
+      margin-bottom: var(--s-8);
+    }
+
+    .col-hint {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-soft);
+      margin-bottom: var(--s-16);
+      max-width: 58ch;
+    }
+
+    .field-lbl {
+      display: block;
+      font-size: var(--fs-meta);
+      font-weight: 600;
+      color: var(--ink-dark-muted);
+      margin-bottom: var(--s-8);
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      background-color: var(--light-bg);
+      color: var(--ink-dark);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-sm);
+      padding: var(--s-12);
+      font-family: inherit;
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+    }
+
+    input[type="text"] {
+      margin-bottom: var(--s-16);
+    }
+
+    textarea {
+      min-height: 156px;
+      resize: vertical;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: 2px solid var(--ink-dark);
+      outline-offset: 1px;
+    }
+
+    .submit-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-24);
+    }
+
+    .submit-note {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-soft);
+      max-width: 64ch;
+    }
+
+    .btn-go {
+      background-color: var(--accent);
+      color: var(--accent-ink);
+      border: 1px solid var(--ink-dark);
+      border-radius: var(--r-sm);
+      padding: var(--s-12) var(--s-32);
+      font-family: inherit;
+      font-size: var(--fs-body);
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-go:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-back {
+      background-color: var(--light-bg);
+      color: var(--ink-dark);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-sm);
+      padding: var(--s-8) var(--s-16);
+      font-family: inherit;
+      font-size: var(--fs-meta);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-back:hover {
+      background-color: var(--light-subtle);
+    }
+
+    /* ВТОРАЯ СТРАНИЦА: РЕЗУЛЬТАТЫ И СКОР ПО ПАРАМЕТРАМ */
+    .res-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--s-24);
+      padding-bottom: var(--s-24);
+      border-bottom: 1px solid var(--light-border);
+      margin-bottom: var(--s-24);
+    }
+
+    .res-top h1 {
+      font-size: var(--fs-h2);
+      line-height: var(--lh-h2);
+      font-weight: 700;
+      color: var(--ink-dark);
+      margin-bottom: var(--s-8);
+    }
+
+    .res-top p {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-muted);
+      max-width: 66ch;
+    }
+
+    .score-panel {
+      display: flex;
+      align-items: center;
+      gap: var(--s-24);
+      padding: var(--s-16) var(--s-24);
+      background-color: var(--light-subtle);
+      border: 1px solid var(--light-border);
+      border-radius: var(--r-md);
+      margin-bottom: var(--s-32);
+    }
+
+    .score-main {
+      min-width: 180px;
+      padding-right: var(--s-24);
+      border-right: 1px solid var(--line-strong);
+    }
+
+    .score-label {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-soft);
+      margin-bottom: var(--s-4);
+    }
+
+    .score-number {
+      font-size: 32px;
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--ink-dark);
+    }
+
+    .score-bar-wrap {
+      flex: 1;
+    }
+
+    .score-bar-track {
+      width: 100%;
+      height: 12px;
+      background-color: var(--line-strong);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      margin-bottom: var(--s-8);
+    }
+
+    .score-bar-fill {
+      width: 50%;
+      height: 100%;
+      background-color: var(--accent);
+      border-right: 1px solid var(--ink-dark);
+    }
+
+    .score-caption {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-muted);
+    }
+
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--s-48);
+      align-items: start;
+    }
+
+    .res-col-title {
+      font-size: var(--fs-meta);
+      font-weight: 700;
+      color: var(--ink-dark-soft);
+      padding-bottom: var(--s-12);
+      border-bottom: 1px solid var(--light-border);
+      margin-bottom: var(--s-16);
+    }
+
+    .check-row {
+      padding: var(--s-16) 0;
+      border-bottom: 1px solid var(--light-border);
+      cursor: pointer;
+      transition: background-color 0.15s ease, padding-left 0.15s ease;
+    }
+
+    .check-row:hover {
+      background-color: var(--light-subtle);
+      padding-left: var(--s-12);
+    }
+
+    .check-row.is-active {
+      background-color: var(--accent-soft);
+      padding-left: var(--s-12);
+    }
+
+    .check-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--s-12);
+      margin-bottom: var(--s-8);
+    }
+
+    .check-name {
+      font-size: var(--fs-body);
+      font-weight: 600;
+      color: var(--ink-dark);
+      max-width: 52ch;
+    }
+
+    .check-badge {
+      font-size: var(--fs-meta);
+      font-weight: 600;
+      color: var(--ink-dark);
+      background-color: var(--light-subtle);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-sm);
+      padding: var(--s-4) var(--s-8);
+      white-space: nowrap;
+    }
+
+    .check-row.is-active .check-badge {
+      background-color: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--ink-dark);
+    }
+
+    .check-quote {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-muted);
+      padding-left: var(--s-12);
+      border-left: 2px solid var(--line-strong);
+      margin-bottom: var(--s-8);
+      max-width: 60ch;
+    }
+
+    .check-note {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-soft);
+      max-width: 60ch;
+    }
+
+    .resume-sheet {
+      padding-top: var(--s-4);
+    }
+
+    .resume-sheet h3 {
+      font-size: var(--fs-meta);
+      font-weight: 700;
+      color: var(--ink-dark-soft);
+      margin: var(--s-16) 0 var(--s-8);
+    }
+
+    .resume-sheet h3:first-child {
+      margin-top: 0;
+    }
+
+    .resume-sheet p {
+      font-size: var(--fs-meta);
+      color: var(--ink-dark-muted);
+      margin-bottom: var(--s-8);
+      max-width: 62ch;
+    }
+
+    .cv-span.is-hit {
+      background-color: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 600;
+      padding: 0 var(--s-4);
+      border-radius: var(--r-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#" class="logo" onclick="goPage('page-input'); return false;">
+        <svg class="logo-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="28" height="28" rx="4" fill="#121316" stroke="#464C58" />
+          <path d="M6 8.5H16.5L14 12H6V8.5Z" fill="#FFFFFF" />
+          <path d="M6 14H13L10.5 17.5H6V14Z" fill="#D1D5DB" />
+          <path d="M15.5 15.5L18.2 18.2L22.5 11.5" stroke="#39FF14" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>СВЕРКА</span>
+      </a>
+      <span class="topbar-meta">Разбор резюме по требованиям вакансии</span>
+    </div>
+  </header>
+
+  <!-- СТРАНИЦА 1 -->
+  <main id="page-input" class="page is-active">
+    <section class="hero-full">
+      <div class="intro-head">
+        <h1>Сверяем резюме с требованиями вакансии</h1>
+        <p>
+          Сервис для кандидатов. Показываем по пунктам вакансии, что подтверждено в резюме, где не хватает конкретики и какие поля в бланке остались незаполненными.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="dark-h2">Этапы сверки</h2>
+        <div class="stack-strip">
+          <div class="stack-card">
+            <div class="stack-num">01</div>
+            <div class="stack-hidden">
+              <h3>Загружаете резюме</h3>
+              <p>Файлом или текстом. Имя, телефон и почту убираем перед отправкой на анализ.</p>
+            </div>
+          </div>
+
+          <div class="stack-card">
+            <div class="stack-num">02</div>
+            <div class="stack-hidden">
+              <h3>Добавляете вакансию</h3>
+              <p>Вставляете ссылку с hh.ru или текст требований из описания.</p>
+            </div>
+          </div>
+
+          <div class="stack-card">
+            <div class="stack-num">03</div>
+            <div class="stack-hidden">
+              <h3>Проверяете статусы</h3>
+              <p>Видите по каждому пункту «есть», «проверьте» или «нет» с цитатой из резюме.</p>
+            </div>
+          </div>
+
+          <div class="stack-card">
+            <div class="stack-num">04</div>
+            <div class="stack-hidden">
+              <h3>Уточняете пробелы</h3>
+              <p>Отвечаете на вопрос про учебный проект и получаете черновик формулировки.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band-white">
+      <h2 class="light-h2">Загрузка резюме и вакансии</h2>
+      <p class="light-lead">
+        После нажатия кнопки «Сверить» откроется страница с результатами проверки по фактам из текста.
+      </p>
+
+      <div class="form-two-col">
+        <div class="col-block">
+          <h3>Резюме</h3>
+          <p class="col-hint">Укажите файл (PDF/DOCX) или вставьте текст резюме.</p>
+
+          <label class="field-lbl" for="cv-file">Файл резюме</label>
+          <input id="cv-file" type="text" value="resume-python-developer.pdf" />
+
+          <label class="field-lbl" for="cv-text">Текст резюме</label>
+          <textarea id="cv-text">Senior Python Engineer, 6 лет опыта. Проектирование асинхронных сервисов на FastAPI и asyncio, PostgreSQL, ClickHouse, Redis, Apache Kafka, Docker, Git, Pytest. Опыт работы: Январь 2023 — настоящее время, Название компании — шаблон не заполнен. Образование: Учебное заведение — не заполнено.</textarea>
+        </div>
+
+        <div class="col-block">
+          <h3>Вакансия</h3>
+          <p class="col-hint">Вставьте ссылку с hh.ru или скопируйте описание вакансии.</p>
+
+          <label class="field-lbl" for="job-url">Ссылка на вакансию</label>
+          <input id="job-url" type="text" value="https://hh.ru/vacancy/112049812" />
+
+          <label class="field-lbl" for="job-text">Текст вакансии</label>
+          <textarea id="job-text">Python разработчик. Требования: Python, FastAPI или asyncio, PostgreSQL, Docker, заполненный опыт работы с метриками, образование, без служебных страниц и пустых шаблонов.</textarea>
+        </div>
+      </div>
+
+      <div class="submit-line">
+        <p class="submit-note">
+          Текст резюме не сохраняется после проверки. Счёт строится по подтверждённым критериям из текста без выдуманных процентов.
+        </p>
+        <button type="button" class="btn-go" onclick="goPage('page-result')">Сверить</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- СТРАНИЦА 2: РЕЗУЛЬТАТЫ -->
+  <main id="page-result" class="page">
+    <section class="band-white">
+      <div class="res-top">
+        <div>
+          <h1>Результат сверки: Python-разработчик</h1>
+          <p>
+            Разбор документа resume-python-developer.pdf по требованиям вакансии и полноте разделов.
+          </p>
+        </div>
+        <button type="button" class="btn-back" onclick="goPage('page-input')">Назад к вводу</button>
+      </div>
+
+      <div class="score-panel">
+        <div class="score-main">
+          <div class="score-label">Счёт подтверждений</div>
+          <div class="score-number">4 / 8</div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-track">
+            <div class="score-bar-fill"></div>
+          </div>
+          <div class="score-caption">
+            Подтверждено 4 из 8 параметров · 2 требуют проверки · 2 незаполненных раздела
+          </div>
+        </div>
+      </div>
+
+      <div class="res-grid">
+        <div>
+          <div class="res-col-title">Параметры и требования (8 критериев)</div>
+
+          <div class="check-row is-active" onclick="markHit(this, 'h-py')">
+            <div class="check-head">
+              <span class="check-name">1. Python, FastAPI / asyncio и базы данных</span>
+              <span class="check-badge">Есть</span>
+            </div>
+            <p class="check-quote">Цитата: «проектирование асинхронных сервисов на базе FastAPI и asyncio, работа с распределенными базами данных PostgreSQL, ClickHouse и Redis».</p>
+            <p class="check-note">Подтверждено в описании опыта и списке навыков.</p>
+          </div>
+
+          <div class="check-row" onclick="markHit(this, 'h-docker')">
+            <div class="check-head">
+              <span class="check-name">2. Инструменты разработки и тесты (Docker, Git, Pytest)</span>
+              <span class="check-badge">Есть</span>
+            </div>
+            <p class="check-quote">Цитата: «Ключевые навыки: Python ... Docker Git ... PostgreSQL Pytest».</p>
+            <p class="check-note">Ключевые инструменты указаны явно.</p>
+          </div>
+
+          <div class="check-row" onclick="markHit(this, 'h-metrics')">
+            <div class="check-head">
+              <span class="check-name">3. Измеримые метрики результата</span>
+              <span class="check-badge">Есть</span>
+            </div>
+            <p class="check-quote">Цитата: «микросервисной системы из 15+ компонентов, что позволило ускорить обработку информации на 80% и повысить эффективность серверной инфраструктуры на 50%».</p>
+            <p class="check-note">В блоке «О себе» приведены конкретные цифры и масштаб системы.</p>
+          </div>
+
+          <div class="check-row" onclick="markHit(this, 'h-exp')">
+            <div class="check-head">
+              <span class="check-name">4. Заполнение раздела «Опыт работы»</span>
+              <span class="check-badge">Проверьте</span>
+            </div>
+            <p class="check-quote">Цитата: «Название компании. Опишите опыт по направлению Python-разработчик: ключевые задачи...».</p>
+            <p class="check-note">Вместо реального места работы и задач оставлен текст-подсказка из бланка.</p>
+          </div>
+
+          <div class="check-row" onclick="markHit(this, 'h-edu')">
+            <div class="check-head">
+              <span class="check-name">5. Заполнение раздела «Образование»</span>
+              <span class="check-badge">Нет</span>
+            </div>
+            <p class="check-quote">Цитата: «Учебное заведение. Степень или квалификация, Специальность».</p>
+            <p class="check-note">Уточнение: впишите вуз, квалификацию и специальность или скройте пустой блок.</p>
+          </div>
+
+          <div class="check-row" onclick="markHit(this, 'h-ai')">
+            <div class="check-head">
+              <span class="check-name">6. Единообразие терминов и написания</span>
+              <span class="check-badge">Проверьте</span>
+            </div>
+            <p class="check-quote">Цитата: «...интеграции передовых ML/AI-моделей...» и «...внедряет Al-агенты...».</p>
+            <p class="check-note">Проверьте написание («AI» вместо «Al») и свяжите формулировку с конкретным проектом.</p>
+          </div>
+
+          <div class="check-row" onclick="markHit(this, 'h-lang')">
+            <div class="check-head">
+              <span class="check-name">7. Указание языков</span>
+              <span class="check-badge">Есть</span>
+            </div>
+            <p class="check-quote">Цитата: «ВЛАДЕНИЕ ЯЗЫКАМИ. Русский - Родной».</p>
+            <p class="check-note">Раздел заполнен; при необходимости добавьте уровень технического английского.</p>
+          </div>
+
+          <div class="check-row" onclick="markHit(this, 'h-clean')">
+            <div class="check-head">
+              <span class="check-name">8. Удаление служебной инструкции из файла</span>
+              <span class="check-badge">Нет</span>
+            </div>
+            <p class="check-quote">Цитата: «Как заполнить этот бланк. Это служебная страница...».</p>
+            <p class="check-note">Вторая страница содержит памятку по заполнению бланка — удалите её перед отправкой.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="res-col-title">Текст резюме (подсветка фрагментов)</div>
+          <div class="resume-sheet">
+            <h3>О себе</h3>
+            <p>
+              Senior Python Engineer, 6 лет опыта. <span id="h-py" class="cv-span is-hit">Проектирование асинхронных сервисов на базе FastAPI и asyncio, работа с распределенными базами данных PostgreSQL, ClickHouse и Redis</span>, настройка очередей сообщений через Apache Kafka. <span id="h-metrics" class="cv-span">Создание микросервисной системы из 15+ компонентов ускорило обработку информации на 80% и повысило эффективность серверной инфраструктуры на 50%.</span> <span id="h-ai" class="cv-span">Интеграция ML/AI-моделей и внедрение Al-агентов.</span>
+            </p>
+
+            <h3>Опыт работы</h3>
+            <p>
+              <span id="h-exp" class="cv-span">Python-разработчик · Январь 2023 — настоящее время · Название компании. Опишите опыт по направлению Python-разработчик...</span>
+            </p>
+
+            <h3>Образование</h3>
+            <p>
+              <span id="h-edu" class="cv-span">Учебное заведение · Степень или квалификация, Специальность.</span>
+            </p>
+
+            <h3>Ключевые навыки и языки</h3>
+            <p>
+              <span id="h-docker" class="cv-span">Python, Базы данных, Docker, Git, PostgreSQL, Pytest</span>, Agile (Scrum, Kanban), Архитектура. <span id="h-lang" class="cv-span">Владение языками: Русский — Родной.</span>
+            </p>
+
+            <h3>Страница 2 документа</h3>
+            <p>
+              <span id="h-clean" class="cv-span">Как заполнить этот бланк — служебная страница шаблона.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function goPage(pageId) {
+      document.querySelectorAll('.page').forEach(function (el) {
+        el.classList.remove('is-active');
+      });
+      var target = document.getElementById(pageId);
+      if (target) {
+        target.classList.add('is-active');
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function markHit(rowEl, spanId) {
+      document.querySelectorAll('.check-row').forEach(function (r) {
+        r.classList.remove('is-active');
+      });
+      rowEl.classList.add('is-active');
+
+      document.querySelectorAll('.cv-span').forEach(function (s) {
+        s.classList.remove('is-hit');
+      });
+      var hit = document.getElementById(spanId);
+      if (hit) {
+        hit.classList.add('is-hit');
+      }
+    }
+  </script>
+</body>
+</html>
