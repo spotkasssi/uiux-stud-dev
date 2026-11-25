@@ -1,0 +1,26 @@
+/* Палитра: 14 уникальных цветов. Компоненты используют только роли. */
+:root {
+  --p-night: #121316; --p-charcoal: #1A1C20; --p-dark-line: #2E323A;
+  --p-white: #FFFFFF; --p-paper: #F4F5F7; --p-line: #D1D5DB;
+  --p-ink: #111827; --p-muted: #4B5563;
+  --p-lime: #39FF14; --p-lime-hover: #2EE00E;
+  --p-green: #166534; --p-amber: #854D0E; --p-red: #B91C1C; --p-blue: #1D4ED8;
+  --bg-canvas: var(--p-white); --bg-subtle: var(--p-paper); --bg-inverse: var(--p-night);
+  --bg-inverse-panel: var(--p-charcoal); --border-inverse: var(--p-dark-line);
+  --border-default: var(--p-line); --text-primary: var(--p-ink); --text-secondary: var(--p-muted);
+  --text-inverse: var(--p-white); --text-inverse-secondary: var(--p-line);
+  --brand-solid: var(--p-lime); --brand-hover: var(--p-lime-hover); --brand-ink: var(--p-ink);
+  --status-success: var(--p-green); --status-warning: var(--p-amber); --status-error: var(--p-red);
+  --status-info: var(--p-blue); --focus-ring: var(--p-blue);
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --r-sm: var(--s-1); --r-md: var(--s-2); --r-lg: var(--s-3);
+  --font: Inter, Arial, sans-serif;
+  --fs-display: 64px; --fs-title: 28px; --fs-lead: 20px; --fs-body: 15px; --fs-meta: 13px;
+  --lh-display: 1.06; --lh-title: 1.2; --lh-body: 1.55; --lh-meta: 1.45;
+  --stroke: 1px; --focus-width: 2px;
+  /* Движение: общие параметры интерактивных компонентов. */
+  --motion-fast: 140ms; --motion-normal: 220ms; --motion-loop: 900ms;
+  --ease-interactive: cubic-bezier(.2,.75,.25,1);
+  --press-scale: .97; --skeleton-opacity: .48;
+}
+.inverse { --focus-ring: var(--brand-solid); }
