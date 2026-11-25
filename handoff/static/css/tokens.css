@@ -1,0 +1,77 @@
+/* Палитра: 14 уникальных цветов. Компоненты используют только роли. */
+:root {
+  --p-night: #121316; --p-charcoal: #1A1C20; --p-dark-line: #2E323A;
+  --p-white: #FFFFFF; --p-paper: #F4F5F7; --p-line: #D1D5DB;
+  --p-ink: #111827; --p-muted: #4B5563;
+  --p-lime: #39FF14; --p-lime-hover: #2EE00E;
+  --p-green: #166534; --p-amber: #854D0E; --p-red: #B91C1C; --p-blue: #1D4ED8;
+  --bg-canvas: var(--p-white); --bg-subtle: var(--p-paper); --bg-inverse: var(--p-night);
+  --bg-inverse-panel: var(--p-charcoal); --border-inverse: var(--p-dark-line);
+  --border-default: var(--p-line); --text-primary: var(--p-ink); --text-secondary: var(--p-muted);
+  --text-inverse: var(--p-white); --text-inverse-secondary: var(--p-line);
+  --brand-solid: var(--p-lime); --brand-hover: var(--p-lime-hover); --brand-ink: var(--p-ink);
+  --status-success: var(--p-green); --status-warning: var(--p-amber); --status-error: var(--p-red);
+  --status-info: var(--p-blue); --focus-ring: var(--p-blue);
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --r-sm: var(--s-1); --r-md: var(--s-2); --r-lg: var(--s-3);
+  --font: Inter, Arial, sans-serif;
+  --fs-display: 64px; --fs-title: 28px; --fs-lead: 20px; --fs-body: 15px; --fs-meta: 13px;
+  --lh-display: 1.06; --lh-title: 1.2; --lh-body: 1.55; --lh-meta: 1.45;
+  --stroke: 1px; --focus-width: 2px;
+  /* Движение: общие параметры интерактивных компонентов. */
+  --motion-fast: 140ms; --motion-normal: 220ms; --motion-loop: 900ms;
+  --ease-interactive: cubic-bezier(.2,.75,.25,1);
+  --press-scale: .97; --skeleton-opacity: .48;
+}
+.inverse { --focus-ring: var(--brand-solid); }
+
+:root { --shadow-ink: color-mix(in srgb, var(--p-ink) 16%, transparent); }
+
+/* Геометрия, перенесённая без изменения исходных размеров из практики 4. */
+:root {
+  --type-fluid-4vw: 4vw;
+  --size-neg--035em: -.035em;
+  --size-neg--02em: -.02em;
+  --size--12em: .12em;
+  --size-1-25rem: 1.25rem;
+  --size-4vw: 4vw;
+  --size-3-5rem: 3.5rem;
+  --size-4-5rem: 4.5rem;
+  --size--06em: .06em;
+  --size-1-75rem: 1.75rem;
+  --size-100vh: 100vh;
+  --size-17-5rem: 17.5rem;
+  --size-20rem: 20rem;
+  --size-5vw: 5vw;
+  --size-52rem: 52rem;
+  --r-pill: 100vmax;
+  --size-2-75rem: 2.75rem;
+  --size-1-125rem: 1.125rem;
+  --size-neg-0-0625rem: -0.0625rem;
+  --size-1em: 1em;
+  --type-fluid-6vw: 6vw;
+  --type-fluid-4-25rem: 4.25rem;
+  --size-0-875rem: 0.875rem;
+  --size-15rem: 15rem;
+  --size-10-625rem: 10.625rem;
+  --size-11-25rem: 11.25rem;
+  --type-fluid-10vw: 10vw;
+  --type-fluid-6rem: 6rem;
+  --size-3vw: 3vw;
+  --size-2-5rem: 2.5rem;
+  --size-21-25rem: 21.25rem;
+  --size-13-75rem: 13.75rem;
+  --size-18-75rem: 18.75rem;
+  --size-8-75rem: 8.75rem;
+  --type-fluid-5vw: 5vw;
+  --size-0-625rem: 0.625rem;
+  --size-0-375rem: 0.375rem;
+  --size-26-25rem: 26.25rem;
+  --size-100vw: 100vw;
+  --size-7-5rem: 7.5rem;
+  --type-fluid-4-5vw: 4.5vw;
+  --size-75vh: 75vh;
+  --size-48rem: 48rem;
+}
+
+:root { --border-control: var(--p-muted); --r-circle:50%; }

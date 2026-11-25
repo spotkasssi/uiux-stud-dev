@@ -1,0 +1,14 @@
+<section class="question" id="question" hidden>
+              <h3>Уточни свой опыт</h3>
+              <p class="muted" id="question-text"></p>
+              <div class="field">
+                {{ field("Что ты действительно делал?", "answer", "textarea", "class=\"control\" id=\"answer\" placeholder=\"Проект, задача, твоя роль и результат\"") }}
+              </div>
+              <div class="actions">
+                {{ button("Подготовить черновик", "class=\"btn primary\" id=\"save-answer\" type=\"button\"") }}
+              </div>
+              <div class="notice" id="draft" data-kind="info" hidden>
+                <strong>Черновик из твоего ответа</strong>
+                <p id="draft-text"></p>
+              </div>
+            </section>

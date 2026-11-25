@@ -1,0 +1,260 @@
+{
+  "tests": [
+    {
+      "check": "1440: главная без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "1440: фото загружены",
+      "pass": true
+    },
+    {
+      "check": "1440: форма без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "1440: empty без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "1440: empty показан",
+      "pass": true
+    },
+    {
+      "check": "1440: loading без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "1440: loading показан",
+      "pass": true
+    },
+    {
+      "check": "1440: error без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "1440: error показан",
+      "pass": true
+    },
+    {
+      "check": "1440: result без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "1440: result показан",
+      "pass": true
+    },
+    {
+      "check": "1440: uncertain без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "1440: uncertain показан",
+      "pass": true
+    },
+    {
+      "check": "1440: 1000 требований",
+      "pass": true
+    },
+    {
+      "check": "390: главная без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "390: фото загружены",
+      "pass": true
+    },
+    {
+      "check": "390: форма без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "390: empty без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "390: empty показан",
+      "pass": true
+    },
+    {
+      "check": "390: loading без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "390: loading показан",
+      "pass": true
+    },
+    {
+      "check": "390: error без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "390: error показан",
+      "pass": true
+    },
+    {
+      "check": "390: result без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "390: result показан",
+      "pass": true
+    },
+    {
+      "check": "390: uncertain без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "390: uncertain показан",
+      "pass": true
+    },
+    {
+      "check": "390: 1000 требований",
+      "pass": true
+    },
+    {
+      "check": "720: главная без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "720: фото загружены",
+      "pass": true
+    },
+    {
+      "check": "720: форма без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "720: empty без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "720: empty показан",
+      "pass": true
+    },
+    {
+      "check": "720: loading без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "720: loading показан",
+      "pass": true
+    },
+    {
+      "check": "720: error без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "720: error показан",
+      "pass": true
+    },
+    {
+      "check": "720: result без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "720: result показан",
+      "pass": true
+    },
+    {
+      "check": "720: uncertain без горизонтального скролла",
+      "pass": true
+    },
+    {
+      "check": "720: uncertain показан",
+      "pass": true
+    },
+    {
+      "check": "720: 1000 требований",
+      "pass": true
+    },
+    {
+      "check": "Поля изначально пусты",
+      "pass": true
+    },
+    {
+      "check": "Tab достигает полей и примера",
+      "pass": true
+    },
+    {
+      "check": "Фокус видим",
+      "pass": true
+    },
+    {
+      "check": "Enter: валидация пустой формы",
+      "pass": true
+    },
+    {
+      "check": "Недопустимый формат",
+      "pass": true
+    },
+    {
+      "check": "TXT прочитан",
+      "pass": true
+    },
+    {
+      "check": "Space: пример заполнен",
+      "pass": true
+    },
+    {
+      "check": "Загрузка и блокировка",
+      "pass": true
+    },
+    {
+      "check": "Escape: отмена",
+      "pass": true
+    },
+    {
+      "check": "Переход к результату",
+      "pass": true
+    },
+    {
+      "check": "Фокус после перехода",
+      "pass": true
+    },
+    {
+      "check": "Индекс рассчитан",
+      "pass": true
+    },
+    {
+      "check": "Цитата и уточнение",
+      "pass": true
+    },
+    {
+      "check": "Безопасный вывод текста",
+      "pass": true
+    },
+    {
+      "check": "Возврат сохраняет ввод",
+      "pass": true
+    },
+    {
+      "check": "Повтор после ошибки",
+      "pass": true
+    },
+    {
+      "check": "Каталог состояний",
+      "pass": true
+    },
+    {
+      "check": "Нет JS ошибок",
+      "pass": true
+    }
+  ],
+  "keyboard_tab_trace": [
+    "home-link",
+    "Перейти к проверке",
+    "hero-example",
+    "01\n          \n            Добавь ре",
+    "02\n          \n            Добавь ва",
+    "03\n          \n            Запусти с",
+    "04\n          \n            Проверь р",
+    "example",
+    "choose",
+    "cv",
+    "url",
+    "job",
+    "show-empty"
+  ],
+  "js_errors": []
+}

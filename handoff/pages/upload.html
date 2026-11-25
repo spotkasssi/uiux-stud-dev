@@ -1,0 +1,84 @@
+<main id="input-page">
+  <section class="hero-stage" id="home">
+    <div class="wrap hero-wrap">
+      <div class="hero-copy">
+        <h1>Сверяем резюме с требованиями вакансии</h1>
+        <p class="lead muted">Узнай, насколько твой опыт соответствует вакансии, какие навыки уже подтверждены и что стоит уточнить в резюме.</p>
+        <div class="actions hero-actions">
+          <a class="btn primary" href="#form-section">Перейти к проверке</a>
+          {{ button("Посмотреть пример", "class=\"btn\" id=\"hero-example\" type=\"button\"") }}
+        </div>
+      </div>
+
+      {% include "partials/steps.html" %}
+    </div>
+  </section>
+
+  <section class="workspace" id="form-section">
+    <div class="wrap workspace-wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Шаг 1 / 2</p>
+          <h2>Загрузка резюме и вакансии</h2>
+          <p class="muted">Добавь резюме и описание вакансии, чтобы сравнить их.</p>
+        </div>
+        {{ button("Заполнить пример", "class=\"btn\" id=\"example\" type=\"button\"") }}
+      </div>
+
+      <form id="form" novalidate>
+        <div class="form-grid full-grid">
+          <div class="form-col">
+            <div class="col-head">
+              <h3>Резюме</h3>
+              <p class="meta">PDF, DOCX или TXT до 5 МБ. TXT читается автоматически; из PDF/DOCX вставь текст вручную.</p>
+            </div>
+
+            <div class="field-block">
+              <div class="field entry-field">
+                <span class="field-label">Файл резюме (необязательно)</span>
+                {% include "partials/file-upload.html" %}
+              </div>
+
+              <div class="field text-field">
+                {{ field("Текст резюме *", "cv", "textarea", "class=\"control tall\" id=\"cv\" placeholder=\"Например: Senior Python Engineer, 6 лет опыта. FastAPI, asyncio, PostgreSQL, Docker, Git, Pytest.\" aria-describedby=\"cv-error cv-status\"") }}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-col">
+            <div class="col-head">
+              <h3>Вакансия</h3>
+              <p class="meta">Добавь ссылку на вакансию. Описание можно вставить в единый блок ниже; автоматически сайт hh.ru не загружается.</p>
+            </div>
+
+            <div class="field-block">
+              <div class="field entry-field">
+                <label for="url">Ссылка на вакансию (необязательно)</label>
+                <div class="link-entry">
+                  <strong>Добавь ссылку на вакансию</strong>
+                  <span class="meta">Скопируй адрес объявления с hh.ru или другого сайта.</span>
+                  <input class="control" id="url" type="url" placeholder="Например: https://rostov.hh.ru/vacancy/139715357" aria-describedby="url-error url-status">
+                  <p class="field-error" id="url-error" hidden></p>
+                  <p id="url-status" class="field-status" role="status" hidden></p>
+                </div>
+              </div>
+              <div class="field text-field">
+                {{ field("Описание вакансии *", "job", "textarea", "class=\"control tall\" id=\"job\" placeholder=\"Вставь описание вакансии с hh.ru (отдельные пункты с новой строки).\" aria-describedby=\"job-error job-status vacancy-origin\"") }}
+                <p id="vacancy-origin" class="meta" role="status" hidden></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <p class="meta">Данные остаются в твоём браузере. Сверка показывает текстовые совпадения, а не вероятность трудоустройства.</p>
+          <div class="actions">
+            {{ button("Открыть результаты", "type=\"button\" class=\"btn\" id=\"show-empty\"") }}
+            {{ button("Сверить", "class=\"btn primary\" id=\"submit\" type=\"submit\"") }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+

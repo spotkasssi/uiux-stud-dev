@@ -1,0 +1,5 @@
+{% macro field(label, id, control, attrs, extra="") -%}
+<label for="{{ id }}">{{ label }}</label>
+{% if control == "textarea" %}<textarea {{ attrs|safe }}></textarea>{% else %}<input {{ attrs|safe }}>{% endif %}
+{% if id != "answer" %}<p id="{{ id }}-error" class="field-error" hidden></p><p id="{{ id }}-status" class="field-status" role="status" hidden></p>{% endif %}{{ extra|safe }}
+{%- endmacro %}

@@ -1,0 +1,23 @@
+<main id="result-page" hidden>
+  <section class="workspace results-stage">
+    <div class="wrap workspace-wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Шаг 2 / 2</p>
+          <h1>Результат сверки</h1>
+          <p class="muted" id="result-subtitle">Сопоставление требований с текстом резюме</p>
+        </div>
+        {{ button("Назад к вводу", "class=\"btn\" id=\"back\" type=\"button\"") }}
+      </div>
+
+      {% include "partials/state-empty.html" %}
+
+      
+
+      {% include "partials/state-error.html" %}
+
+      {% include "partials/state-result.html" %}
+    </div>
+  </section>
+</main>
+

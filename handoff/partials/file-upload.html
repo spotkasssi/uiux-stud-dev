@@ -1,0 +1,9 @@
+<div class="drop" id="drop" data-state="idle">
+                  <strong id="file-title">Перетащи файл сюда</strong>
+                  <span class="meta" id="file-message" role="status">PDF, DOCX, TXT · до 5 МБ</span>
+                  <div class="actions inline-actions">
+                    {{ button("Выбрать файл", "type=\"button\" class=\"btn\" id=\"choose\"") }}
+                    {{ button("Убрать файл", "type=\"button\" class=\"btn\" id=\"remove-file\" hidden") }}
+                  </div>
+                  <input type="file" id="file" aria-label="Файл резюме" accept=".pdf,.docx,.txt" hidden>
+                </div>

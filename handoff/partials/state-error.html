@@ -1,0 +1,10 @@
+<section class="state-panel" id="error" hidden>
+        <div class="notice" data-kind="error" role="alert">
+          <strong>Провести сверку не удалось</strong>
+          <p>Сервис анализа сейчас не ответил. Введённые данные сохранены в форме — попробуй снова через минуту.</p>
+        </div>
+        <div class="actions">
+          {{ button("Повторить", "class=\"btn primary\" id=\"retry\" type=\"button\"") }}
+          {{ button("К данным", "class=\"btn\" id=\"error-back\" type=\"button\"") }}
+        </div>
+      </section>

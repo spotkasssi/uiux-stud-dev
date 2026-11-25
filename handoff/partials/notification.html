@@ -1,0 +1,10 @@
+<aside id="feedback" class="notice feedback" data-kind="info" hidden aria-label="Статус сверки">
+  <div class="feedback-head">
+    <span id="feedback-icon" aria-hidden="true"></span>
+    <strong id="feedback-title" role="status"></strong>
+    {{ button("×", "type=\"button\" id=\"dismiss\" class=\"feedback-close\" aria-label=\"Закрыть уведомление\"") }}
+  </div>
+  <p id="progress-text" class="meta"></p>
+  {% include "partials/state-loading.html" %}
+</aside>
+

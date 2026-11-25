@@ -1,0 +1,58 @@
+<section id="result" hidden>
+        <div class="overview-strip">
+          <section class="meter-zone" aria-labelledby="meter-title">
+            <div>
+              <p class="eyebrow">Текстовое сопоставление</p>
+              <h2 id="meter-title">Сводка по вакансии</h2>
+            </div>
+            <div class="meter-wrap">
+              <div class="speedometer" id="fit-meter" style="--percent:0;">
+                <div class="speedometer-center">
+                  <strong id="fit-percent">0</strong>
+                  <span class="meta">из 100</span>
+                </div>
+              </div>
+              <div class="meter-copy">
+                <p class="meta">Индекс текстового совпадения</p>
+                <p class="fit-note" id="fit-note">Запусти сверку, чтобы получить оценку.</p>
+                <div class="score-line">
+                  <div>
+                    <p class="meta">Счёт совпадений</p>
+                    <p class="score-number" id="score-number"></p>
+                  </div>
+                  <div class="score-side">
+                    <div class="score-track" aria-hidden="true"><span id="score-fill"></span></div>
+                    <div class="summary" id="summary" aria-label="Количество требований по статусам"></div>
+                    <p class="meta" id="done-text"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="vacancy-zone" aria-labelledby="selected-title">
+            <div>
+              <p class="eyebrow">Выбранная вакансия</p>
+              <h2 id="selected-title">Текст для сверки</h2>
+              <p id="result-origin" class="meta"></p>
+            </div>
+            <p id="selected-link" class="meta">Ссылка не указана.</p>
+            <div id="selected-vacancy" class="selected-vacancy">После запуска здесь будет показан текст вакансии из формы.</div>
+          </section>
+        </div>
+
+        {% include "partials/state-low-confidence.html" %}
+
+        <div class="result-grid full-grid">
+          <div class="result-col">
+            <h3 class="col-title">Совпадения по описанию</h3>
+            <div id="requirements"></div>
+          </div>
+
+          <div class="result-col result-source">
+            <h3 class="col-title">Текст резюме · источник</h3>
+            <p id="source" class="source"></p>
+            {% include "partials/experience-editor.html" %}
+          </div>
+        </div>
+      </section>
